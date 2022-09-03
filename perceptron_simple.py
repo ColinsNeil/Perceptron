@@ -17,7 +17,7 @@ def Estimation(entrees, poids):
     
     return estim
 
-def MiseAJourPoids(entrees, poids, vit_appr, res_att):
+def MiseAJourPoids(entrees, poids, vit_appr, res_att, estim):
     """
     Desc : Fonction qui permet de mettre à jour tout les poids des entrées
 
@@ -33,9 +33,17 @@ def MiseAJourPoids(entrees, poids, vit_appr, res_att):
     nb_poids = len(poids)
     nouv_poids = poids
 
-    estim = Estimation(entrees, poids)
-
     for i in range(nb_poids):
-        nouv_poids[i] = poids[i] + vit_appr * (res_att - estim)
+        nouv_poids[i] = poids[i] + vit_appr * (res_att - estim) * entrees[i]
 
     return nouv_poids
+
+data_set = [
+    [ [1, 1], 1],
+    [ [1, 2], 1],
+    [ [2, 1], 1],
+    [ [4, 3], -1],
+    [ [4, 4], -1],
+    [ [5, 3], -1],
+    [ [5, 4], -1],
+]
