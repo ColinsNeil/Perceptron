@@ -3,16 +3,39 @@ def Estimation(entrees, poids):
     Desc : Fait le produit scalaire des entrées avec les poids pour faire une prédiction
 
     Paramètres : 
-            entrees : Nombre totales des entrées
-            poids : poids de chaque entrée
+            entrees : Liste des entrées
+            poids : Liste des poids de chaque entrée
 
     Retourne :
-            res : Prédiction par rapport aux entrées et aux poids
+            estim : Estimation par rapport aux entrées et aux poids
     """
     nb_entrees = len(entrees)
-    res = 0
+    estim = 0
 
     for i in range(nb_entrees):
-        res += entrees[i] * poids[i]
+        estim += entrees[i] * poids[i]
     
-    return res
+    return estim
+
+def MiseAJourPoids(entrees, poids, vit_appr, res_att):
+    """
+    Desc : Fonction qui permet de mettre à jour tout les poids des entrées
+
+    Paramètres :
+            entrees : Liste des entrées
+            poids : Liste des poids de chaque entrée
+            vit_appr : Vitesse d'apprentissage du perceptron
+            res_att : Résultat attendu
+    
+    Retourne :
+            nouv_poids : Nouveaux poids
+    """
+    nb_poids = len(poids)
+    nouv_poids = poids
+
+    estim = Estimation(entrees, poids)
+
+    for i in range(nb_poids):
+        nouv_poids[i] = poids[i] + vit_appr * (res_att - estim)
+
+    return nouv_poids
