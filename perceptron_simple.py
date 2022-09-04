@@ -1,3 +1,5 @@
+#Lien Wikipedia sur le perceptron : https://en.wikipedia.org/wiki/Perceptron
+
 import csv
 
 def Perceptron(entrees, poids):
