@@ -11,7 +11,7 @@ def Perceptron(entrees, poids):
             poids : Liste des poids de chaque entrée
 
     Retourne :
-            sortie : 1 si le produit scalaire entre les entrees et des poids est positif et 0 sinon
+            sortie : 1 si le produit scalaire entre les entrées et les poids est positif et 0 sinon
     """
     nb_entrees = len(entrees)
     prod_scal = 0
@@ -27,7 +27,7 @@ def Perceptron(entrees, poids):
 
 def MiseAJourPoids(entrees, poids, vit_appr, res_att, estim):
     """
-    Desc : Fonction qui permet de mettre à jour tout les poids des entrées
+    Desc : Fonction qui permet de mettre à jour tous les poids des entrées
 
     Paramètres :
             entrees : Liste des entrées
@@ -47,26 +47,26 @@ def MiseAJourPoids(entrees, poids, vit_appr, res_att, estim):
 
     return nouv_poids
 
-def CalculerErreur(liste_estim, liste_res_att):
+def CalculerMoyenneErreur(liste_estim, liste_res_att):
     """
-    Desc : Fonction qui calcul l'écart type entre les estimations du perceptron et les résultats attendu
+    Desc : Fonction qui calcule la moyenne des erreurs entre les estimations du perceptron et les résultats attendus
 
     Paramètres :
-            liste_estim : Liste des estimations du perceptron pour chaque exemples
-            liste_res_att : Liste des résultats attendu pour chaques exemples
+            liste_estim : Liste des estimations du perceptron pour chaque exemple
+            liste_res_att : Liste des résultats attendus pour chaque exemple
 
     Retourne :
-            res = L'écart type entre les résultats attendu et les écarts types
+            moy_err : La moyenne des erreurs
     """
     nb_donnees = len(liste_estim)
-    res = 0
+    moy_err = 0
 
     for i in range(nb_donnees):
-        res += abs(liste_res_att[i] - liste_estim[i])
+        moy_err += abs(liste_res_att[i] - liste_estim[i])
     
-    res = res / nb_donnees
+    moy_err = moy_err / nb_donnees
 
-    return res
+    return moy_err
 
 def Apprentissage(jeu_donnees, precision, vit_appr):
     """
@@ -78,7 +78,7 @@ def Apprentissage(jeu_donnees, precision, vit_appr):
             vit_appr : Vitesse d'apprentissage du perceptron
 
     Retourne :
-            poids : Les poids correctes pour le perceptron
+            poids : Les poids corrects pour le perceptron
     """
     nb_donnees = len(jeu_donnees)
     nb_poids = len(jeu_donnees[0][0]) + 1
@@ -100,7 +100,7 @@ def Apprentissage(jeu_donnees, precision, vit_appr):
 
             poids = MiseAJourPoids(entrees, poids, vit_appr, res_att, estim)
 
-        erreur = CalculerErreur(liste_estim, liste_res_att)
+        erreur = CalculerMoyenneErreur(liste_estim, liste_res_att)
 
         if (erreur < precision):
             break
